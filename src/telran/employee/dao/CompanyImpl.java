@@ -55,8 +55,8 @@ public class CompanyImpl implements Company {
     @Override
     public double totalSalary() {
         return employees.stream()
-                .map(Employee::calcSalary)
-                .reduce(0.,(acum, s) -> acum + s);
+                .mapToDouble(Employee::calcSalary)
+                .sum();
     }
 
     //O(n)
@@ -65,8 +65,8 @@ public class CompanyImpl implements Company {
         return employees.stream()
                 .filter(e -> e instanceof SalesManager)
                 .map(e -> (SalesManager) e)
-                .map(SalesManager::getSalesValue)
-                .reduce(0., Double::sum);
+                .mapToDouble(SalesManager::getSalesValue)
+                .sum();
     }
 
     //O(n)
